@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Flagly</string>
+    <string name="remote_value_label">Remote value</string>
+</resources>
