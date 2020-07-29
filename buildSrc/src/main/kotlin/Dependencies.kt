@@ -2,6 +2,8 @@ private const val COROUTINES_VERSION = "1.3.7"
 private const val DAGGER_VERSION = "2.28.1"
 private const val KOTLIN_VERSION = "1.3.72"
 private const val ANDROID_X_CORE_VERSION = "1.3.0"
+private const val ESPRESSO_VERSION = "3.2.0"
+private const val TEST_RUNNER_VERSION = "1.2.0"
 
 object Dependencies {
 
@@ -24,4 +26,10 @@ object Dependencies {
     const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:1.1.3"
 
     const val JUNIT = "junit:junit:4.12"
+
+    const val ESPRESSO_CONTRIB = "androidx.test.espresso:espresso-contrib:$ESPRESSO_VERSION"
+    const val ESPRESSO_CORE = "androidx.test.espresso:espresso-core:$ESPRESSO_VERSION"
+    const val ESPRESSO_INTENTS = "androidx.test.espresso:espresso-intents:$ESPRESSO_VERSION"
+
+    const val TEST_RUNNER = "androidx.test:runner:$TEST_RUNNER_VERSION"
 }

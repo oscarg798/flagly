@@ -36,6 +36,16 @@ dependencies {
     implementation(Dependencies.APP_COMPAT)
     implementation(Dependencies.CONSTRAINT_LAYOUT)
 
+    implementation(Dependencies.ESPRESSO_CONTRIB)
+    implementation(Dependencies.ESPRESSO_INTENTS)
+    implementation(Dependencies.ESPRESSO_CORE)
+    implementation(Dependencies.TEST_RUNNER)
+
+    androidTestImplementation(Dependencies.ESPRESSO_CONTRIB)
+    androidTestImplementation(Dependencies.ESPRESSO_INTENTS)
+    androidTestImplementation(Dependencies.ESPRESSO_CORE)
+    androidTestImplementation(Dependencies.TEST_RUNNER)
+
     testImplementation(Dependencies.JUNIT)
     
     implementation(project(mapOf("path" to ":app")))

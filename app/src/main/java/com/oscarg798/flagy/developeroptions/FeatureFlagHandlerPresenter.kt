@@ -6,7 +6,6 @@ import com.oscarg798.flagly.featureflag.FeatureFlag
 import com.oscarg798.flagly.featureflag.FeatureFlagHandler
 import com.oscarg798.flagly.featureflag.FeatureFlagProvider
 import com.oscarg798.flagly.utils.CoroutineContextProvider
-import com.oscarg798.flagy.exceptions.FeatureFlagNotPresentInHandlerException
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -29,14 +28,14 @@ class FeatureFlagHandlerPresenter @Inject constructor(
 
     override fun onViewReady() {
         view?.setup()
+        setupFeatureFlagValues()
+    }
+
+    private fun setupFeatureFlagValues() {
         launch {
             val values = withContext(coroutineContextProvider.backgroundDispatcher) {
                 featureFlagProvider.provideAppSupportedFeatureflags().map { featureFlag ->
-                    FeatureFlagValue(
-                        featureFlag,
-                        getLocalValue(featureFlag),
-                        remoteFeatureFlagHandler.isFeatureEnabled(featureFlag)
-                    )
+                    getFeatureFlagValue(featureFlag)
                 }
             }
 
@@ -48,15 +47,34 @@ class FeatureFlagHandlerPresenter @Inject constructor(
         view = null
     }
 
-    override fun onChange(featureFlag: FeatureFlag, value: Boolean) {
+    override fun onFeatureFlagValueChanged(featureFlag: FeatureFlag, value: Boolean) {
         localFeatureflagHandler.setValue(featureFlag, value)
     }
 
-    private fun getLocalValue(featureFlag: FeatureFlag): Boolean {
-        return try {
+    override fun onOverrideValueChange(featureFlag: FeatureFlag, override: Boolean) {
+        if (override) {
+            localFeatureflagHandler.setValue(featureFlag, false)
+        } else {
+            localFeatureflagHandler.removeOverridenValue(featureFlag)
+        }
+        setupFeatureFlagValues()
+    }
+
+    private fun getFeatureFlagValue(featureFlag: FeatureFlag): FeatureFlagValue {
+        val isOverride = localFeatureflagHandler.isValueOverriden(featureFlag)
+        return FeatureFlagValue(
+            featureFlag,
+            isOverride,
+            getLocalValue(featureFlag, getLocalValue(featureFlag, isOverride)),
+            remoteFeatureFlagHandler.isFeatureEnabled(featureFlag)
+        )
+    }
+
+    private fun getLocalValue(featureFlag: FeatureFlag, isOverride: Boolean): Boolean =
+        if (isOverride) {
             localFeatureflagHandler.isFeatureEnabled(featureFlag)
-        } catch (e: FeatureFlagNotPresentInHandlerException) {
+        } else {
             false
         }
-    }
+
 }

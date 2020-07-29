@@ -4,21 +4,21 @@ import com.oscarg798.flagly.featureflag.FeatureFlag
 
 object FeatureFlagOne : FeatureFlag{
     override val name: String
-        get() = "Feature Flag One"
+        get() = "one"
 }
 
 object FeatureFlagTwo : FeatureFlag{
     override val name: String
-        get() = "Feature Flag Two"
+        get() = "two"
 }
 
 
 object FeatureFlagThree : FeatureFlag{
     override val name: String
-        get() = "Feature Flag Three"
+        get() = "three"
 }
 
 object FeatureFlagFour : FeatureFlag{
     override val name: String
-        get() = "Feature Flag Four"
+        get() = "four"
 }

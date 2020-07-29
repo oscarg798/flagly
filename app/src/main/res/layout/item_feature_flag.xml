@@ -6,16 +6,26 @@
     android:layout_height="wrap_content"
     android:padding="16dp">
 
+    <CheckBox
+        android:id="@+id/cbOverride"
+        android:layout_width="@dimen/match_constraint"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Override" />
+
     <TextView
         android:id="@+id/tvFeatureFlagName"
         android:layout_width="@dimen/match_constraint"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/switchFeatureFlag"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbOverride"
         tools:text="Something" />
 
     <Switch
@@ -26,7 +36,7 @@
         android:text=""
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/tvFeatureFlagName" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"

@@ -13,6 +13,7 @@ configure<PublishingExtension> {
                 artifactId = LibraryConstants.ARTIFACT_NAME
                 version = LibraryConstants.VERSION
                 from(components.findByName("android"))
+                artifact(sourcesJar)
                 artifact("$buildDir/outputs/aar/app-release.aar")
                 pom {
                     name.set(LibraryConstants.ARTIFACT_NAME)

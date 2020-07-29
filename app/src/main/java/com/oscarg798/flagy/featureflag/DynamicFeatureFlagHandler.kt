@@ -8,4 +8,8 @@ interface DynamicFeatureFlagHandler : FeatureFlagHandler {
     override fun isFeatureEnabled(featureFlag: FeatureFlag): Boolean
 
     fun setValue(featureFlag: FeatureFlag, value: Boolean)
+
+    fun isValueOverriden(featureFlag: FeatureFlag): Boolean
+
+    fun removeOverridenValue(featureFlag: FeatureFlag)
 }

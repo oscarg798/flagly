@@ -16,15 +16,34 @@ class FeatureFlagHandlerViewHolder(private val binding: ItemFeatureFlagBinding) 
         featureFlagValueChangedListenerListener: FeatureFlagValueChangedListener
     ) {
         with(binding) {
-            binding.switchFeatureFlag.isChecked = featureFlagValue.currentValue
+            switchFeatureFlag.setOnCheckedChangeListener(null)
+            cbOverride.setOnCheckedChangeListener(null)
+            cbOverride.isChecked = featureFlagValue.isOverride
+            switchFeatureFlag.isEnabled = featureFlagValue.isOverride
+            switchFeatureFlag.isChecked = featureFlagValue.currentValue
             tvFeatureFlagName.text = featureFlagValue.featureFlag.name
             tvFeatureRemoteValue.text = featureFlagValue.remoteValue.toString()
-            switchFeatureFlag.setOnCheckedChangeListener { _, isChecked ->
-                featureFlagValueChangedListenerListener.onChange(
-                    featureFlagValue.featureFlag,
-                    isChecked
-                )
-            }
+
+            setupChangeListeners(featureFlagValueChangedListenerListener, featureFlagValue)
+        }
+    }
+
+    private fun ItemFeatureFlagBinding.setupChangeListeners(
+        featureFlagValueChangedListenerListener: FeatureFlagValueChangedListener,
+        featureFlagValue: FeatureFlagValue
+    ) {
+        switchFeatureFlag.setOnCheckedChangeListener { _, isChecked ->
+            featureFlagValueChangedListenerListener.onFeatureFlagValueChanged(
+                featureFlagValue.featureFlag,
+                isChecked
+            )
+        }
+
+        cbOverride.setOnCheckedChangeListener { _, isChecked ->
+            featureFlagValueChangedListenerListener.onOverrideValueChange(
+                featureFlagValue.featureFlag,
+                isChecked
+            )
         }
     }
 }

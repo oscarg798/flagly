@@ -23,8 +23,6 @@ android {
         targetSdkVersion(AndroidConstants.TARGET_SDK_VERSION)
         versionCode = 1
         versionName = "1.0"
-
-        testInstrumentationRunner = AndroidConstants.TEST_RUNNER
     }
 
     buildTypes {
