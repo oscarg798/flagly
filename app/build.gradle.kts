@@ -13,7 +13,6 @@ apply {
     from("../install.gradle.kts")
 }
 
-
 android {
     compileSdkVersion(AndroidConstants.COMPILE_SDK_VERSION)
     buildToolsVersion(AndroidConstants.BUILD_TOOLS_VERSION)

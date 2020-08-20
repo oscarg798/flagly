@@ -2,12 +2,11 @@ object LibraryConstants {
     const val PUBLICATION_NAME = "flagly"
     const val ARTIFACT_NAME = "Flagly"
     const val ARTIFACT_GROUP = "com.oscarg798.flagly"
-    const val VERSION = "1.0.4"
+    const val VERSION = "1.0.5"
 
     const val POM_URL = "https://github.com/com.flagly.oscarg798/flagly"
     const val POM_SRC_URL = "https://github.com/com.flagly.oscarg798/flagly"
     const val POM_DESCRIPTION = "Handle Feature Flags"
-
 
     const val LICENSE_NAME = "MIT"
     const val LICENSE_URL = "https://opensource.org/licenses/mit-license.php"
